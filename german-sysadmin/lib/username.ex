@@ -2,14 +2,14 @@ defmodule Username do
   def sanitize([]), do: []
 
   def sanitize([head | tail]) do
-    cond do
-      head >= 97 and head <= 122 -> [head | sanitize(tail)]
-      head == ?_ -> [head | sanitize(tail)]
-      head == ?ä -> [?a, ?e | sanitize(tail)]
-      head == ?ö -> [?o, ?e | sanitize(tail)]
-      head == ?ü -> [?u, ?e | sanitize(tail)]
-      head == ?ß -> [?s, ?s | sanitize(tail)]
-      true -> sanitize(tail)
+    case head do
+      head when head >= 97 and head <= 122 -> [head | sanitize(tail)]
+      ?_ -> [?_ | sanitize(tail)]
+      ?ä -> [?a, ?e | sanitize(tail)]
+      ?ö -> [?o, ?e | sanitize(tail)]
+      ?ü -> [?u, ?e | sanitize(tail)]
+      ?ß -> [?s, ?s | sanitize(tail)]
+      _ -> sanitize(tail)
     end
   end
 end
