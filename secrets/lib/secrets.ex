@@ -19,19 +19,19 @@ defmodule Secrets do
 
   def secret_divide(secret) do
     fn value ->
-      div(value, secret)
+      trunc(value / secret)
     end
   end
 
   def secret_and(secret) do
     fn value ->
-      Bitwise.band(secret, value)
+      Bitwise.band(value, secret)
     end
   end
 
   def secret_xor(secret) do
     fn value ->
-      Bitwise.bxor(secret, value)
+      Bitwise.bxor(value, secret)
     end
   end
 
