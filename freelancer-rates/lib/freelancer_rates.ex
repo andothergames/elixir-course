@@ -1,18 +1,19 @@
 defmodule FreelancerRates do
   def daily_rate(hourly_rate), do: hourly_rate * 8.0
 
-  def apply_discount(before_discount, discount),
-    do: before_discount * (1 - discount / 100)
+  def apply_discount(before_discount, discount) do
+    percentage = discount / 100.0
+    amount = before_discount * percentage
+    before_discount - amount
+  end
 
   def monthly_rate(hourly_rate, discount) do
-    discounted_hourly_rate = apply_discount(hourly_rate, discount)
-    discounted_daily_rate = daily_rate(discounted_hourly_rate)
-    ceil(discounted_daily_rate * 22)
+    discounted_rate = apply_discount(hourly_rate, discount)
+    ceil(discounted_rate * 22 * 8)
   end
 
   def days_in_budget(budget, hourly_rate, discount) do
-    discounted_hourly_rate = apply_discount(hourly_rate, discount)
-    discounted_daily_rate = daily_rate(discounted_hourly_rate)
-    Float.floor(budget / discounted_daily_rate, 1)
+    daily_discounted_rate = apply_discount(hourly_rate, discount) * 8
+    Float.floor(budget / daily_discounted_rate, 1)
   end
 end
