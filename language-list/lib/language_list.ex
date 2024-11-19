@@ -1,14 +1,10 @@
 defmodule LanguageList do
-  def new() do
-    []
-  end
+  def new(), do: []
 
-  def add(list, language) do
-    [language | list]
-  end
+  def add(list, language), do: [language | list]
 
   def remove(list) do
-    List.delete_at(list, 0)
+    tl(list)
   end
 
   def first(list) do
