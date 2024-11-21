@@ -2,7 +2,7 @@ defmodule HighSchoolSweetheart do
   def first_letter(name) do
     name
     |> String.trim()
-    |> String.first()
+    |> String.at(0)
   end
 
   def initial(name) do
@@ -12,31 +12,31 @@ defmodule HighSchoolSweetheart do
   end
 
   def initials(full_name) do
-    [first_name, last_name] =
-      String.split(full_name, " ")
-
-    initial(first_name) <> " " <> initial(last_name)
+    names = String.split(full_name, " ")
+    first_name = initial(Enum.at(names, 0))
+    surname = initial(Enum.at(names, 1))
+    first_name <> " " <> surname
   end
 
   def pair(full_name1, full_name2) do
-    person_one = initials(full_name1)
-    person_two = initials(full_name2)
+    initials1 = initials(full_name1)
+    initials2 = initials(full_name2)
 
-    "     ******       ******\n" <>
-      "   **      **   **      **\n" <>
-      " **         ** **         **\n" <>
-      "**            *            **\n" <>
-      "**                         **\n" <>
-      "**     #{person_one}  +  #{person_two}     **\n" <>
-      " **                       **\n" <>
-      "   **                   **\n" <>
-      "     **               **\n" <>
-      "       **           **\n" <>
-      "         **       **\n" <>
-      "           **   **\n" <>
-      "             ***\n" <>
-      "              *\n"
-
-    # Please implement the pair/2 function
+    """
+         ******       ******
+       **      **   **      **
+     **         ** **         **
+    **            *            **
+    **                         **
+    **     #{initials1}  +  #{initials2}     **
+     **                       **
+       **                   **
+         **               **
+           **           **
+             **       **
+               **   **
+                 ***
+                  *
+    """
   end
 end
